@@ -52,6 +52,6 @@ void loop() {
   }
   
   //Serial.println(distanceSensor.measureDistanceCm());
-  //delay(1000);
+  delay(100);
   
 }
