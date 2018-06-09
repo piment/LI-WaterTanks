@@ -71,16 +71,15 @@ void loop() {
   }
   
   double dst = distanceSensor.measureDistanceCm();
-  
   dst = round(dst);
+  
   int dst2 = (int) dst;
-  matrix.print(dst2 - 16);
+  
+  matrix.print(dst2 - x);
   matrix.writeDisplay();
+  
   int leds = dst2;
-  Serial.print(leds);
-  Serial.print(" - ");
   leds = map(leds, x, 39, 3, 16);
-  Serial.println(leds);
   for(int i =0; i < 23; i++){
     strip.setPixelColor(i, 0, 0, 150);
   }
@@ -88,6 +87,19 @@ void loop() {
     strip.setPixelColor(i, 150, 0, 0);
   }
   strip.show();
+  if(16 <= dst2 <= 39){
+     matrix.blinkRate(0);
+     matrix.print((dst2 - x) * 280.4);
+     matrix.writeDisplay();
+  }
+  else{
+    matrix.blinkRate(1);
+    matrix.writeDigitRaw(0,63);
+    matrix.writeDigitRaw(1,63);
+    matrix.writeDigitRaw(3,63);
+    matrix.writeDigitRaw(4,63);
+    matrix.writeDisplay();
+  }
   delay(50);
   
   /*dst = round(dst);
