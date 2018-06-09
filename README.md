@@ -7,7 +7,7 @@
 * The display show 4 digits, and players have to find the correct water level to see the correct 4 digits code.
 ********
 
-## PARTS:
+## PARTS LIST :
 * Arduino NANO x 1
 * Adafruit 4 Digits 7 Segments Display with I2C Backpack x 1
 * HCSR04 Ultrasonic sensor x 1
@@ -15,3 +15,9 @@
 * Active Buzzer breakout board x 2
 * 5mm Red Led x 2
 * Micro Switch x 2
+
+## DEPENDENCIES :
+* Adafruit NeoPixel
+* Adafruit LED Backpack
+* HCSR04
+
