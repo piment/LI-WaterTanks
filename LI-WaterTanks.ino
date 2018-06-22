@@ -87,7 +87,8 @@ void loop() {
     strip.setPixelColor(i, 150, 0, 0);
   }
   strip.show();
-  if(16 <= dst2 <= 39){
+ // if(17 <= dst2 <= 37){
+  if(17 <= dst2 <= 37){
      matrix.blinkRate(0);
      matrix.print((dst2 - x) * 280.4);
      matrix.writeDisplay();
