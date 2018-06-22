@@ -12,7 +12,7 @@
 #define right_pwr 8
 #define left_active 6
 #define right_active 5
-
+volatile int lastdst = 0;
 const int x = 16; //distance between sensor and higher water level
 
 Adafruit_7segment matrix = Adafruit_7segment();
@@ -22,6 +22,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(22, 2, NEO_GRB + NEO_KHZ800);
 void setup() {
   strip.begin();
   strip.show();
+  strip.setBrightness(50);
   Serial.begin(9600);
   matrix.begin(0x70);
   matrix.setBrightness(15);
@@ -74,23 +75,27 @@ void loop() {
   dst = round(dst);
   
   int dst2 = (int) dst;
+  if(dst2 != lastdst){
+    lastdst = dst2;
+    matrix.print(dst2 - x);
+    matrix.writeDisplay();
+  }
   
-  matrix.print(dst2 - x);
-  matrix.writeDisplay();
   
   int leds = dst2;
+  //Serial.println(dst2);
   leds = map(leds, x, 39, 3, 16);
   for(int i =0; i < 23; i++){
-    strip.setPixelColor(i, 0, 0, 150);
+    strip.setPixelColor(i, 0, 150, 250);
   }
   for(int i =0; i < leds; i++){
-    strip.setPixelColor(i, 150, 0, 0);
+    strip.setPixelColor(i, 100, 0, 0);
   }
   strip.show();
  // if(17 <= dst2 <= 37){
   if(17 <= dst2 <= 37){
      matrix.blinkRate(0);
-     matrix.print((dst2 - x) * 280.4);
+     matrix.print((lastdst - x) * 280.4);
      matrix.writeDisplay();
   }
   else{
